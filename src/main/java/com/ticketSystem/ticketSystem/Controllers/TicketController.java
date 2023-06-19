@@ -1,7 +1,7 @@
 package com.ticketSystem.ticketSystem.Controllers;
 
-import com.ticketSystem.ticketSystem.Models.User;
-import com.ticketSystem.ticketSystem.Services.UserService;
+import com.ticketSystem.ticketSystem.Models.Ticket;
+import com.ticketSystem.ticketSystem.Services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/register")
-public class UserController {
+@RequestMapping("api/tickets")
+public class TicketController {
+
     @Autowired
-    UserService userService;
+    TicketService ticketService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public Ticket createTicket(@RequestBody Ticket ticket) {
+        return ticketService.createTicket(ticket);
     }
+
 }
