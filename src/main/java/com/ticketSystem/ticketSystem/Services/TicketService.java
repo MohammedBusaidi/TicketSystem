@@ -27,12 +27,10 @@ public class TicketService {
     public Ticket findTicketById(Long ticketId) {
         return ticketRepository.findById(ticketId).get();
     }
-
-//    public void assignTicketToUser(Long ticketId, Long userId) {
-//        User user = userRepository.getOne(userId); // Get a reference to the user entity
-//
-//        Ticket ticket = ticketRepository.getOne(ticketId); // Get a reference to the ticket entity
-//        ticket.assignUser(user); // Assign the ticket to the user
-//        ticketRepository.save(ticket); // Save the updated ticket
-//    }
+    public Ticket assignTickets(Long ticketId, Long representativeId) {
+        Ticket ticket = ticketRepository.findById(ticketId).get();
+        User user = userRepository.findById(representativeId).get();
+        ticket.setUser(user);
+        return ticketRepository.save(ticket);
+    }
 }

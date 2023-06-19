@@ -17,12 +17,14 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("api/register")
-public class UserController extends GenericController{
+public class UserController extends GenericController {
     @Autowired
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<APICustomResponse> createUser(@NonNull @RequestBody User user) {
+    public ResponseEntity<APICustomResponse> createUser(
+            @NonNull
+            @RequestBody User user) {
         Long userId = userService.createUser(user);
         return createResponse(
                 Map.of("userId", userId),
