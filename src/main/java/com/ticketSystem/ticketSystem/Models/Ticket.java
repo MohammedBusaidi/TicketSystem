@@ -16,8 +16,11 @@ import javax.persistence.*;
 public class Ticket extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ticketId;
     private String category;
     private String description;
     private String priority;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -3,6 +3,7 @@ package com.ticketSystem.ticketSystem.Controllers;
 import com.ticketSystem.ticketSystem.Models.APICustomResponse;
 import com.ticketSystem.ticketSystem.Models.User;
 import com.ticketSystem.ticketSystem.Services.UserService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class UserController extends GenericController{
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<APICustomResponse> createUser(@RequestBody User user) {
+    public ResponseEntity<APICustomResponse> createUser(@NonNull @RequestBody User user) {
         Long userId = userService.createUser(user);
         return createResponse(
                 Map.of("userId", userId),
