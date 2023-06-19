@@ -1,5 +1,6 @@
 package com.ticketSystem.ticketSystem.Models;
 
+import com.ticketSystem.ticketSystem.BaseEntity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Ticket {
+public class Ticket extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
