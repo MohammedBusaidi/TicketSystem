@@ -12,10 +12,11 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(User user) {
+    public Long createUser(User user) {
         LocalDateTime now = LocalDateTime.now();
         user.setCreatedDate(now);
         user.setActive(true);
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user.getId();
     }
 }
