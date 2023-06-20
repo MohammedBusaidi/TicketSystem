@@ -1,5 +1,6 @@
 package com.ticketSystem.ticketSystem.Services;
 
+import com.ticketSystem.ticketSystem.Models.ManageTicketRequest;
 import com.ticketSystem.ticketSystem.Models.Ticket;
 import com.ticketSystem.ticketSystem.Models.User;
 import com.ticketSystem.ticketSystem.Repositories.TicketRepository;
@@ -31,6 +32,12 @@ public class TicketService {
         Ticket ticket = ticketRepository.findById(ticketId).get();
         User user = userRepository.findById(representativeId).get();
         ticket.setUser(user);
+        return ticketRepository.save(ticket);
+    }
+    public Ticket ticketManagement(Long ticketId, ManageTicketRequest manageTicketRequest){
+        Ticket ticket = ticketRepository.findById(ticketId).get();
+        ticket.setStatus(manageTicketRequest.status());
+        ticket.setNotes(manageTicketRequest.notes());
         return ticketRepository.save(ticket);
     }
 }
