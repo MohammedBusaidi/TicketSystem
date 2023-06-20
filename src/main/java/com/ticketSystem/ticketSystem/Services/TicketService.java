@@ -1,5 +1,6 @@
 package com.ticketSystem.ticketSystem.Services;
 
+import com.ticketSystem.ticketSystem.Enum.Status;
 import com.ticketSystem.ticketSystem.Models.ManageTicketRequest;
 import com.ticketSystem.ticketSystem.Models.Ticket;
 import com.ticketSystem.ticketSystem.Models.User;
@@ -34,7 +35,7 @@ public class TicketService {
         ticket.setUser(user);
         return ticketRepository.save(ticket);
     }
-    public Ticket ticketManagement(Long ticketId, ManageTicketRequest manageTicketRequest){
+    public Ticket manageTickets(Long ticketId, ManageTicketRequest manageTicketRequest){
         Ticket ticket = ticketRepository.findById(ticketId).get();
         ticket.setStatus(manageTicketRequest.status());
         ticket.setNotes(manageTicketRequest.notes());

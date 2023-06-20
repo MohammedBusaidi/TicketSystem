@@ -1,6 +1,5 @@
 package com.ticketSystem.ticketSystem.Models;
 
-import com.ticketSystem.ticketSystem.Enum.Priority;
 import com.ticketSystem.ticketSystem.Enum.Status;
 
 public record ManageTicketRequest(

@@ -1,13 +1,8 @@
 package com.ticketSystem.ticketSystem.Controllers;
 
-import com.ticketSystem.ticketSystem.Models.APICustomResponse;
-import com.ticketSystem.ticketSystem.Models.Ticket;
-import com.ticketSystem.ticketSystem.Models.User;
-import com.ticketSystem.ticketSystem.Models.assignTicketRequest;
+import com.ticketSystem.ticketSystem.Models.*;
 import com.ticketSystem.ticketSystem.Services.TicketService;
-import com.ticketSystem.ticketSystem.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,14 +26,23 @@ public class TicketController extends GenericController {
                 "Ticket created successfully",
                 CREATED);
     }
+
     @PutMapping("{ticketId}/assign")
     public ResponseEntity<APICustomResponse> assignTicketToUser(
             @PathVariable("ticketId") Long ticketId,
-            @RequestBody assignTicketRequest assignTicketRequest) {
+            @RequestBody AssignTicketRequest assignTicketRequest) {
         ticketService.assignTickets(ticketId, assignTicketRequest.representativeId());
         return createResponse(
                 Map.of("representativeId", assignTicketRequest.representativeId()),
                 "Ticket assigned successfully",
-                CREATED);
+                OK);
+    }
+
+    @PutMapping("{ticketId}")
+    public ResponseEntity<Ticket> ticketManagement(
+            @PathVariable("ticketId") Long ticketId,
+            @RequestBody ManageTicketRequest manageTicketRequest) {
+        Ticket ticket = ticketService.manageTickets(ticketId, manageTicketRequest);
+        return ResponseEntity.ok(ticket);
     }
 }

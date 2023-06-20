@@ -1,6 +1,6 @@
 package com.ticketSystem.ticketSystem.Models;
 
-public record assignTicketRequest(
+public record AssignTicketRequest(
         Long representativeId
 ) {
 }
