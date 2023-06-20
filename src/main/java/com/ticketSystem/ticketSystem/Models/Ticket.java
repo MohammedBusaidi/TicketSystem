@@ -32,5 +32,4 @@ public class Ticket extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 }

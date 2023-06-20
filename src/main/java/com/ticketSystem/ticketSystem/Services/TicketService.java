@@ -30,10 +30,6 @@ public class TicketService {
         return ticket.getTicketId();
     }
 
-    public Ticket findTicketById(Long ticketId) {
-        return ticketRepository.findById(ticketId).get();
-    }
-
     public Ticket assignTickets(Long ticketId, Long representativeId) {
         LocalDateTime now = LocalDateTime.now();
         Ticket ticket = ticketRepository.findById(ticketId).get();
@@ -53,19 +49,19 @@ public class TicketService {
     }
 
     public List<Ticket> getTicketsByCriteria(Long ticketId, Priority priority, Status status) {
-        List<Ticket> tickets = new ArrayList<>();
         if (ticketId != null) {
-            Ticket ticket = ticketRepository.findById(ticketId).orElseThrow();
-            if (ticketId != null) {
-                tickets.add(ticket);
+            Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
+            if (ticket != null) {
+                List<Ticket> ticketList = new ArrayList<>();
+                ticketList.add(ticket);
+                return ticketList;
             }
         } else if (status != null) {
-            tickets = ticketRepository.findByStatus(status);
+            return ticketRepository.findByStatus(status);
         } else if (priority != null) {
             return ticketRepository.findByPriority(priority);
-        } else {
-            return Collections.emptyList();
         }
-        return tickets;
+
+        return Collections.emptyList();
     }
 }

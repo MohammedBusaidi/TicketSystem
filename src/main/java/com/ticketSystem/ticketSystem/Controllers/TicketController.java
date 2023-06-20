@@ -4,7 +4,6 @@ import com.ticketSystem.ticketSystem.Enum.Priority;
 import com.ticketSystem.ticketSystem.Enum.Status;
 import com.ticketSystem.ticketSystem.Models.*;
 import com.ticketSystem.ticketSystem.Services.TicketService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,16 +53,17 @@ public class TicketController extends GenericController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Ticket>> getTicketsByCriteria(
-            @RequestParam(value = "ticketId", required = false) Long ticketId,
-            @RequestParam(value = "status", required = false) Status status,
-            @RequestParam(value = "priority", required = false) Priority priority) {
+    public ResponseEntity<APICustomResponse> getTicketsByCriteria(
+            @RequestParam(value = "id", required = false) Long ticketId,
+            @RequestParam(value = "priority", required = false) Priority priority,
+            @RequestParam(value = "status", required = false) Status status
+    ) {
         List<Ticket> tickets = ticketService.getTicketsByCriteria(ticketId, priority, status);
-        if (!tickets.isEmpty()) {
-            return ResponseEntity.ok(tickets);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            return createResponse(
+                    Map.of("tickets", tickets),
+                    "List of the searched tickets",
+                    OK);
+
     }
 
 }
