@@ -1,5 +1,6 @@
 package com.ticketSystem.ticketSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ticketSystem.ticketSystem.BaseEntity.BaseEntity;
 import com.ticketSystem.ticketSystem.Enum.Priority;
 import com.ticketSystem.ticketSystem.Enum.Status;
@@ -29,6 +30,7 @@ public class Ticket extends BaseEntity {
     private Status status;
     @Column(nullable = true)
     private String notes;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -1,5 +1,6 @@
 package com.ticketSystem.ticketSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ticketSystem.ticketSystem.BaseEntity.BaseEntity;
 import com.ticketSystem.ticketSystem.Enum.Role;
 import lombok.*;
@@ -23,6 +24,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Ticket> tickets;
 }
